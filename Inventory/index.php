@@ -1,93 +1,68 @@
-<?php
-  include "dependent/header.php";
-  include "dependent/genclasses.php";
+  <?php
+    // Include header and classes
+    include "dependent/header.php";
+    include "dependent/genclasses.php";
+    include "dependent/config.php";
+    $sql = "SELECT * FROM Categories";
+    // $sql = "SELECT Categories.Name CName, Products.Name PName FROM Products INNER JOIN Categories ON Products.CategoryID = Categories.ID WHERE Products.isDeleted != true ";
+    $result = mysqli_query($conn, $sql);
 
-  // $shoes = new Product("Nike", 10000);
-  // $shirt = new Product("Outbreak", 3000);
+  ?>
+  <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+          <div class="page-header clearfix">
+              <a href="create.php" class="btn btn-success pull-right">Add New Employee</a>
+          </div>
+        </div>
+        <div class="col-md-2">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+                if (mysqli_num_rows($result) > 0) {
+                  // output data of each row
+                  while($row = mysqli_fetch_assoc($result)) {
+                    // echo "id: " . $row["ID"]. " - Name: " . $row["Name"]. " - Price: " . $row["Price"]. "<br>";
+                    echo "<tr>
+                      <td>".$row["ID"]."</td>
+                      <td>".$row["Name"]."</td>
+                      <td>
+                        <a href='read.php?id=". $row['ID'] ."' title='View Record' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>
+                        <a href='update.php?id=". $row['ID'] ."' title='Update Record' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>
+                        <a href='delete.php?id=". $row['ID'] ."' title='Delete Record' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>
+                      </td>
+                    </tr> ";
+                  }
+                } else {
+                  echo "0 results";
+                }
 
-  // $shoes->name = "Nike";
-  // $shoes->price = 10000;
-  // $shirt->name = "Outbreak";
-  // $shirt->price = 3000;
-  // $shoes->set_name("Nike");
-  // $shirt->set_name("Outbreak");
-
-  // echo "The name of this shoe is ".$shoes->name." and it's price is ".$shoes->price."<br />";
-  // echo $shirt->name;
-  // echo $shoes->get_name();
-  // echo "<br />".$shirt->get_name();
-
-  // $shoes = new Shoes("Nike", 10000);
-  //
-  // echo $shoes->get_name()."<br />";
-  // $shoes->message()."<br />";
-  // $shoes->heThere();
-
-  // echo Goodbye::LEAVING_MESSAGE;
-
-  // $toyota = new Toyota("Toyota");
-  // echo $toyota->intro();
-
-  // greeting::welcome();
-
-  // Procedural DB Connection
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-
-  // Create connection
-  // $conn = mysqli_connect($servername, $username, $password);
-  //
-  // // Check connection
-  // if (!$conn) {
-  //   die("Connection failed: " . mysqli_connect_error());
-  // }
-  // echo "Connected successfully";
-  // mysqli_close($conn);
-
-  // Select Data
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "nexskillfullstackb2php";
-
-  // Create connection
-  $conn = mysqli_connect($servername, $username, $password, $dbname);
-  // Check connection
-  if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-  }
-
-  // $sql = "SELECT * FROM Products";
-  $sql = "SELECT Categories.Name CName, Products.Name PName FROM Products INNER JOIN Categories ON Products.CategoryID = Categories.ID WHERE Products.isDeleted != true ";
-  $result = mysqli_query($conn, $sql);
-
-  if (mysqli_num_rows($result) > 0) {
-    // output data of each row
-    while($row = mysqli_fetch_assoc($result)) {
-      // echo "id: " . $row["ID"]. " - Name: " . $row["Name"]. " - Price: " . $row["Price"]. "<br>";
-      echo "Category Name: " . $row["CName"]. " - Product Name: " . $row["PName"]. "<br>";
-    }
-  } else {
-    echo "0 results";
-  }
-
-  mysqli_close($conn);
-
-  // OOP DB Connection
-  // $servername = "localhost";
-  // $username = "root";
-  // $password = "";
-  //
-  // // Create connection
-  // $conn = new mysqli($servername, $username, $password);
-  //
-  // // Check connection
-  // if ($conn->connect_error) {
-  //   die("Connection failed: " . $conn->connect_error);
-  // }
-  // echo "Connected successfully with OOP";
-  // $conn->close();
-
-  include "dependent/footer.php";
-?>
+                mysqli_close($conn);
+              ?>
+            </tbody>
+          </table>
+       </div>
+        <div class="col-md-2">
+        </div>
+      </div>
+      <?php
+      // Include footer
+      include "dependent/footer.php";
+      ?>
+    </div>
