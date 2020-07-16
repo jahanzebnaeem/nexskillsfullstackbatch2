@@ -81,8 +81,9 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Full Stack Batch - 2
+                    <h2>Full Stack Batch - 2</h2>
                 </div>
+                <p>{{$welcomeMsg}}</p>
             </div>
         </div>
     </body>

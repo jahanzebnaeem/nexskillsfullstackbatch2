@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $welcomeMsg = 'Welcome to the class of Full Stack Batch 2';
+    return view('welcome', compact('welcomeMsg'));
 });
 
 Route::get('/test', function(){
