@@ -18,6 +18,4 @@ Route::get('/', function () {
     return view('welcome', compact('welcomeMsg'));
 });
 
-Route::get('/test', function(){
-    return 'Welcome to the class';
-});
+Route::get('/test', 'TestController@index');
