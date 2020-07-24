@@ -15,4 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@about');
 Route::get('/about', 'HomeController@about');
-Route::get('/services', 'HomeController@services');
+// Route::get('/services', 'HomeController@services');
+
+Route::get('/services', 'ServiceController@index');
+Route::post('/services', 'ServiceController@store');
+
+// RESTfull
+Route::get('/customers', 'CustomerController@index');
+Route::get('/customers/create', 'CustomerController@create');
+
